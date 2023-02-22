@@ -45,7 +45,7 @@ When moving BTC.B back to the Bitcoin Blockchain, the user sends a transaction o
 An Avalanche has been building up steam as of late — the price of AVAX rose by nearly 100% in the month of January and BTC hodlers have been moving holdings to the Avalanche chain. 
 What’s been fueling this growth over the past month — and what does the future hold for Avalanche?   
 Will this growth continue into the new year? Or will growth stagnate as 2023 continues to progress?  
-To answer these questions we
+To answer these questions, we use "avalanche.core.fact_token_transfers" and "avalanche.core.fact_transactions" to calculate bridge transactions to Avalanche from Bitcoin Holders from October 1st, 2022, to February 15th, 2023. Then we discussed  Avax price using "ethereum.core.fact_hourly_token_prices" table and tried to find patterns in Avax price. Also, recent activities on Avalanche were investigated. Finally, features that might influence the Avax price are discussed. 
 
 
 """)
@@ -63,7 +63,7 @@ with c2:
     st.info(
         '**Data:  [Flipside Crypto](https://flipsidecrypto.xyz/)**', icon="🧠")
     st.info(
-        '**Project Github:  [Up The Mountain](https://github.com/Kaizen-Step/The_Whales_of_Near)**', icon="💻")
+        '**Project Github:  [Up The Mountain](https://github.com/Kaizen-Step/Up_The_Mountain)**', icon="💻")
 
 with c1:
     st.info(

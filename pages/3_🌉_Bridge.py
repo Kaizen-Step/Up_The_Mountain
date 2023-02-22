@@ -54,21 +54,22 @@ Since blockchain assets are often not compatible with one another, bridges creat
 
 st.info(""" ##### In This Bridge Section you can find: ####
 
-* One and Only Whale Swap List  
-* Platforms Whale Used for Swapping 
-* Top 20 Swaps from Near (Not Whale List)
-* Top 20 Swaps to Near (Not Whale List)
+* Daily Number of Bridge Transactions to Avax    
+* Daily Bridge to Avax Volume  
+* Daily Users who Bridge to Avax  
+* Daily Bridge to Avax Volume per Transaction [BTC]    
+* Bridge HeatMaps  
 
 
 """)
 
 
 #################################################################################################
-st.write(""" ## Daily Bridge Transactions to BTC""")
+st.write(""" ## Daily Bridge Transactions To Avax from Bitcoin holders""")
 
 # Daily Bridge Transactions
 fig = px.bar(df.sort_values(["DATE", "Daily Transactions"], ascending=[
-    True, False]), x="DATE", y="Daily Transactions", title='Daily Bridge Number of Transactions')
+    True, False]), x="DATE", y="Daily Transactions", title='Daily Bridge Transactions')
 fig.update_layout(legend_title=None, xaxis_title=None,
                   yaxis_title='Daily Transaction')
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
@@ -81,6 +82,15 @@ fig.update_layout(legend_title=None, xaxis_title=None,
                   yaxis_title='Volume [BTC]')
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
+
+st.write(""" ## Daily Users who Bridge to Avax""")
+
+# Daily Bridge Transactions
+fig = px.bar(df3.sort_values(["DATE", "Daily Transactions"], ascending=[
+    True, False]), x="DATE", y="Daily Transactions", title='Daily Bridgers BTC to AVAX')
+fig.update_layout(legend_title=None, xaxis_title=None,
+                  yaxis_title='Daily Transaction')
+st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
 # avg Bridge amount per Transaction
 fig = px.area(df.sort_values(["DATE", "avg amount per Transaction"], ascending=[
@@ -95,36 +105,35 @@ st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 st.write(""" ## Bridge Heatmap""")
 
 
-# Average Amount per Transaction on hour of day (UTC)
-fig = px.density_heatmap(df2, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="Volume on hour of day (UTC)",
-                         histfunc='avg', title='Volume on hour of day (UTC)', nbinsx=24)
-fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
-                  'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
-fig.update_yaxes(categoryorder='array', categoryarray=week_days)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+c1, c2 = st.columns(2)
+
+with c1:
+
+    # Average Amount per Transaction on hour of day (UTC)
+    fig = px.density_heatmap(df2, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="Volume on hour of day (UTC)",
+                             histfunc='avg', title='Bridge To Avax from Bitcoin Holders Volume on hour of day (UTC)', nbinsx=24)
+    fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
+        'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
+    fig.update_yaxes(categoryorder='array', categoryarray=week_days)
+    st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+
+with c2:
+    # Average Amount per Transaction on hour of day (UTC)
+    fig = px.density_heatmap(df2, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="avg amount per Transaction on hour of day (UTC)",
+                             histfunc='avg', title='Bridge To Avax from Bitcoin Holders Volume per Transaction on hour of day (UTC)', nbinsx=24)
+    fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
+        'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
+    fig.update_yaxes(categoryorder='array', categoryarray=week_days)
+    st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+
 
 # Transactions on hour of day (UTC)
 fig = px.density_heatmap(df2, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="Transactions on hour of day (UTC)",
-                         histfunc='avg', title='Transactions on hour of day (UTC)', nbinsx=24)
+                         histfunc='avg', title='Bridge To Avax from Bitcoin Holders on hour of day (UTC)', nbinsx=24)
 fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
                   'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
 fig.update_yaxes(categoryorder='array', categoryarray=week_days)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
-# Average Amount per Transaction on hour of day (UTC)
-fig = px.density_heatmap(df2, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="avg amount per Transaction on hour of day (UTC)",
-                         histfunc='avg', title='Average Amount per Transaction on hour of day (UTC)', nbinsx=24)
-fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
-                  'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
-fig.update_yaxes(categoryorder='array', categoryarray=week_days)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+
 ###############################################################################
-
-st.write(""" ## Daily Bridge Transactions to Avax""")
-
-# Daily Bridge Transactions
-fig = px.bar(df3.sort_values(["DATE", "Daily Transactions"], ascending=[
-    True, False]), x="DATE", y="Daily Transactions", title='Daily Bridgers BTC to AVAX')
-fig.update_layout(legend_title=None, xaxis_title=None,
-                  yaxis_title='Daily Transaction')
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)

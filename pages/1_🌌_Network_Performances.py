@@ -59,18 +59,27 @@ df6 = TX_SUCC_Fail
 ######################################################################################################################
 
 
-st.write(""" ### Network Performance Concept ##  """)
+st.write(""" ### Key Metrics to Measure Blockchain Network performance ##  """)
 
 st.write("""
-A Simply put, cryptocurrency transaction is a transfer of information made between blockchain addresses. These transfers have to be signed with a private key that corresponds to its address. Signed transactions are broadcast to the network of nodes, active computers that follow a specific set of rules to validate transactions and blocks. Valid transactions need to be confirmed by being included in blocks through the process of mining.[[4]](https://www.bitstamp.net/learn/crypto-101/how-do-cryptocurrency-transactions-work/)   """)
+Everything out there has a particular set of characteristics against which its performance can be measured. Be it something as simple as a car or as intricately intertwined as the blockchain. These factors also help draw a comparison between two or multiple blockchains in order to find out the one that’s best for developing projects.[[4]](https://bitcoinist.com/key-metrics-to-measure-blockchain-network-performance/)   
+
+* Transactions per Second (TPS)  
+* Transaction Latency  
+* Block Time  
+* Success Rate
+
+For this section we try to evaluate Avalanche with these Metirce.
+   """)
 
 
 st.info(""" ##### In This Network Performance you can find: ####
 
- * Whales Different Type of Transactions Activity 
- * Whales Transactions Compare to other Users  
- * Whales Weekly Transaction Prespective view (Last 12 Month)
- * Whales Daily Transaction Zoom in (Last 3 Month)
+ * Daily Trnasaction Per Second (TPS)  
+ * Daily Average Transactions per block  
+ * Daily Time Between Blocks (Average and Max Value)
+ * Daily Success Rate
+ * Network Performance Heat Maps
 
 
 
@@ -80,6 +89,15 @@ st.info(""" ##### In This Network Performance you can find: ####
 #####################################################################################
 
 st.write(""" ## Daily Network Performance  """)
+
+
+# Average Transaction per second (TPS)
+fig = px.bar(df5.sort_values(["DATE", "AVG_TPS"], ascending=[
+    True, False]), x="DATE", y="AVG_TPS", title='Daily Average Transaction per second(TPS)')
+fig.update_layout(legend_title=None, xaxis_title=None,
+                  yaxis_title='Daily TPS')
+st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+
 
 # Daily Average Transactions per block
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
@@ -109,13 +127,6 @@ fig.update_yaxes(
     title_text="Daily Average Transactions per block", secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
-# Average Transaction per second (TPS)
-fig = px.bar(df5.sort_values(["DATE", "AVG_TPS"], ascending=[
-    True, False]), x="DATE", y="AVG_TPS", title='Daily Average Transaction per second(TPS)')
-fig.update_layout(legend_title=None, xaxis_title=None,
-                  yaxis_title='Daily TPS')
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
-
 # Daily Success Rate
 fig = px.bar(df5.sort_values(["DATE", "DAILY_SUCCESS_RATE"], ascending=[
     True, False]), x="DATE", y="DAILY_SUCCESS_RATE", title='Daily Success Rate')
@@ -128,38 +139,42 @@ st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
 st.write(""" ## Network Performance Heatmaps """)
 
-# Block per Minute Daily HEAT
-fig = px.density_heatmap(df, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="block per minute on hour of day (UTC)",
-                         histfunc='avg', title='Block per Minute Daily HEAT', nbinsx=24)
-fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
-                  'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
-fig.update_yaxes(categoryorder='array', categoryarray=week_days)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+c1, c2 = st.columns(2)
 
-# "transactions per minute on hour of day (UTC)"
-fig = px.density_heatmap(df, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="transactions per minute on hour of day (UTC)",
-                         histfunc='avg', title="Transactions per minute on hour of day (UTC)", nbinsx=24)
-fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
-                  'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
-fig.update_yaxes(categoryorder='array', categoryarray=week_days)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+with c1:
+    # Block per Minute Daily HEAT
+    fig = px.density_heatmap(df, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="block per minute on hour of day (UTC)",
+                             histfunc='avg', title='Block per Minute Daily HEAT', nbinsx=24)
+    fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
+        'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
+    fig.update_yaxes(categoryorder='array', categoryarray=week_days)
+    st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
-# "transactions per minute on hour of day (UTC)"
-fig = px.density_heatmap(df, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="User per minute on hour of day (UTC)",
-                         histfunc='avg', title="User per minute on hour of day (UTC)", nbinsx=24)
-fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
-                  'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
-fig.update_yaxes(categoryorder='array', categoryarray=week_days)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+    # "transactions per minute on hour of day (UTC)"
+    fig = px.density_heatmap(df, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="transactions per minute on hour of day (UTC)",
+                             histfunc='avg', title="Transactions per minute on hour of day (UTC)", nbinsx=24)
+    fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
+        'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
+    fig.update_yaxes(categoryorder='array', categoryarray=week_days)
+    st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
 
-# Failed transactions per minute on hour of day (UTC)
-fig = px.density_heatmap(df2, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="Failed transactions per minute on hour of day (UTC)",
-                         histfunc='avg', title='Failed transactions per minute on hour of day (UTC)', nbinsx=24)
-fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
-                  'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
-fig.update_yaxes(categoryorder='array', categoryarray=week_days)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+with c2:
+    # "transactions per minute on hour of day (UTC)"
+    fig = px.density_heatmap(df, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="User per minute on hour of day (UTC)",
+                             histfunc='avg', title="User per minute on hour of day (UTC)", nbinsx=24)
+    fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
+        'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
+    fig.update_yaxes(categoryorder='array', categoryarray=week_days)
+    st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+
+    # Failed transactions per minute on hour of day (UTC)
+    fig = px.density_heatmap(df2, x="HOUR_OF_DAY", y="DAY_OF_WEEK", z="Failed transactions per minute on hour of day (UTC)",
+                             histfunc='avg', title='Failed transactions per minute on hour of day (UTC)', nbinsx=24)
+    fig.update_layout(legend_title=None, xaxis_title=None, yaxis_title=None, xaxis={
+        'dtick': 2}, coloraxis_colorbar=dict(title='Transfers'))
+    fig.update_yaxes(categoryorder='array', categoryarray=week_days)
+    st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
 
 #################################################################################

@@ -58,47 +58,26 @@ df7 = Price_Change_Comparison_Hourly
 
 #########################################################################################
 
-st.write(""" ### CEX Exchange Concept ##  """)
+st.write(""" ### Avax Price Summary ##  """)
 
 st.write("""
-A centralized exchange (CEX) offers cryptocurrency exchange services to registered users. Its primary service typically matches buyers and sellers with an order book,through a centralized platform. To better understanding of Cex, on the other hand, DEX is a decentralized exchange (DEX) uses on-chain smart contracts to run its exchange services. In most cases, users swap tokens from liquidity pools, with liquidity provided by other users in exchange for swap fees. [[5]](https://academy.binance.com/en/articles/what-s-the-difference-between-a-cex-and-a-dex)   """)
+The live Avalanche price today is 20.56 USD with a 24-hour trading volume of 692,788,306 USD. Avalanche is up 2.23% in the last 24 hours. The current CoinMarketCap ranking is #15, with a live market cap of 6,479,078,378 USD. It has a circulating supply of 315,125,667 AVAX coins and a max. supply of 720,000,000 AVAX coins.An Avalanche has been building up steam as of late — the price of AVAX rose by nearly 100% from start of 2023 with 11.18 USD. [[6]](https://coinmarketcap.com/currencies/avalanche/ )  """)
 
 
-st.info(""" ##### In This CEX Exchange Section you can find: ####
-
-##### Transfer from CEX #####  
-* Each Whale Number of Transactions and Volume From CEX 
-* Weekly Transactions and Volume From CEX Prespective View (last 12 Month)
-* Daily Transactions and Volume From CEX zoom in (Last 3 Month)
-##### Transfer To CEX #####    
-* Each Whale Number of Transactions and Volume To CEX
-* Weekly Transactions and Volume To CEX from Prespective View (last 12 Month)
-* Daily Transactions and Volume To Cex zoom in (Last 3 Month)
+st.info(""" ##### In This Avax Price Section you can find: ####
 
 
+* Avax Price with Standard Moving Averages [H & D]
+* Avax Price Compare to Role Models [H & D]
+* Avax Price Compare to Rivals [H & D]
+* Price Change Rate [H & D]
 """)
 
 
 #########################################################################################
 
-# Hourly Price- AVAX vs ETH
-fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
-fig.add_trace(go.Line(x=df["DATE"], y=df["AVAX_AVG_PRICE"],
-                      name="Avax Houlrly Average Price"), secondary_y=False)
-fig.add_trace(go.Line(x=df['DATE'], y=df["AVAX_MA_PRICE"],
-                      name='Avax Hourly Max Price'), secondary_y=True)
-fig.add_trace(go.Line(x=df['DATE'], y=df["AVAX_MIN_PRICE"],
-                      name='Avax Hourly Min Price'), secondary_y=True)
-fig.update_layout(
-    title_text='Avax Hourly Max Min Average Price')
-fig.update_yaxes(
-    title_text='Price', secondary_y=False)
-fig.update_yaxes(
-    title_text='Avax Hourly Price', secondary_y=True)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
-
-# Avax Price Moving averages [Hourly]
+# Avax Price Moving averages
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
 fig.add_trace(go.Line(x=df2['DATE'], y=df2["AVAX_PRICE"],
                       name="Avax PRICE"), secondary_y=False)
@@ -111,7 +90,7 @@ fig.add_trace(go.Line(x=df2['DATE'], y=df2['MA52'],
 fig.add_trace(go.Line(x=df2['DATE'], y=df2['MA100'],
                       name='Hourly Moving average (MA100)'), secondary_y=True)
 fig.update_layout(
-    title_text='Avax Price Moving averages [Hourly]')
+    title_text='Avax Daily Price With Standard Moving averages ')
 fig.update_yaxes(
     title_text='Price', secondary_y=False)
 fig.update_yaxes(title_text='Moving averages', secondary_y=True)
@@ -133,54 +112,43 @@ fig.add_trace(go.Line(x=df3['DATE'], y=df3['MA100'],
 fig.add_trace(go.Line(x=df3['DATE'], y=df3['MA200'],
                       name='Hourly Moving average (MA200)'), secondary_y=True)
 fig.update_layout(
-    title_text='Hourly Price- AVAX vs ETH')
+    title_text='Avax Hourly Price With Standard Moving Averages')
 fig.update_yaxes(
     title_text='Price', secondary_y=False)
 fig.update_yaxes(title_text='Moving averages', secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
+# Hourly Price- AVAX vs ETH
+fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
+fig.add_trace(go.Line(x=df["DATE"], y=df["AVAX_AVG_PRICE"],
+                      name="Avax Houlrly Average Price"), secondary_y=False)
+fig.add_trace(go.Line(x=df['DATE'], y=df["AVAX_MA_PRICE"],
+                      name='Avax Hourly Max Price'), secondary_y=True)
+fig.add_trace(go.Line(x=df['DATE'], y=df["AVAX_MIN_PRICE"],
+                      name='Avax Hourly Min Price'), secondary_y=True)
+fig.update_layout(
+    title_text='Avax Hourly Max Min Average Price')
+fig.update_yaxes(
+    title_text='Price', secondary_y=False)
+fig.update_yaxes(
+    title_text='Avax Hourly Price', secondary_y=True)
+st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+
 ################################################################################
-st.write(""" ## Avax Price Compare to other Tokens Hourly """)
+st.write(""" ## Avax Price Compare to Role Models """)
 
-# AVAX vs MATIC Price [Hourly]
+# AVAX vs Bitcoin Price [Daily]
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
-fig.add_trace(go.Line(x=df4['DATE'], y=df4["AVAX_PRICE"],
+fig.add_trace(go.Line(x=df5['DATE'], y=df5["AVAX_PRICE"],
                       name="Avax Price"), secondary_y=False)
-fig.add_trace(go.Line(x=df4['DATE'], y=df4["MATIC_PRICE"],
-                      name='Matic Price'), secondary_y=True)
+fig.add_trace(go.Line(x=df5['DATE'], y=df5["BTC_PRICE"],
+                      name='Bitcoin Price'), secondary_y=True)
 fig.update_layout(
-    title_text='AVAX vs MATIC Price [Hourly]')
+    title_text='AVAX vs Bitcoin Price [Daily]')
 fig.update_yaxes(
-    title_text=' Hourly Avax Price', secondary_y=False)
-fig.update_yaxes(title_text=' Hourly Matic Price', secondary_y=True)
+    title_text=' Daily Avax Price', secondary_y=False)
+fig.update_yaxes(title_text=' Daily Bitcoin Price', secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
-
-# AVAX vs OP Price [Hourly]
-fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
-fig.add_trace(go.Line(x=df4['DATE'], y=df4["AVAX_PRICE"],
-                      name="Avax Price"), secondary_y=False)
-fig.add_trace(go.Line(x=df4['DATE'], y=df4["OP_PRICE"],
-                      name='Optimism Price'), secondary_y=True)
-fig.update_layout(
-    title_text='AVAX vs Optimism Price [Hourly]')
-fig.update_yaxes(
-    title_text=' Hourly Avax Price', secondary_y=False)
-fig.update_yaxes(title_text=' Hourly Optimism Price', secondary_y=True)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
-
-# AVAX vs Solana Price [Hourly]
-fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
-fig.add_trace(go.Line(x=df4['DATE'], y=df4["AVAX_PRICE"],
-                      name="Avax Price"), secondary_y=False)
-fig.add_trace(go.Line(x=df4['DATE'], y=df4["SOL_PRICE"],
-                      name='Solana Price'), secondary_y=True)
-fig.update_layout(
-    title_text='AVAX vs Solana Price [Hourly]')
-fig.update_yaxes(
-    title_text=' Hourly Avax Price', secondary_y=False)
-fig.update_yaxes(title_text=' Hourly Solana Price', secondary_y=True)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
-
 
 # AVAX vs Bitcoin Price [Hourly]
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
@@ -195,7 +163,22 @@ fig.update_yaxes(
 fig.update_yaxes(title_text=' Hourly Bitcoin Price', secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
-# AVAX vs Bitcoin Price [Hourly]
+
+# AVAX vs ETH Price [Daily]
+fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
+fig.add_trace(go.Line(x=df5['DATE'], y=df5["AVAX_PRICE"],
+                      name="Avax Price"), secondary_y=False)
+fig.add_trace(go.Line(x=df5['DATE'], y=df5["ETH_PRICE"],
+                      name='Etherum Price'), secondary_y=True)
+fig.update_layout(
+    title_text='AVAX vs Etherum Price [Daily]')
+fig.update_yaxes(
+    title_text=' Daily Avax Price', secondary_y=False)
+fig.update_yaxes(title_text=' Daily Etherum Price', secondary_y=True)
+st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+
+
+# AVAX vs ETH Price [Hourly]
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
 fig.add_trace(go.Line(x=df4['DATE'], y=df4["AVAX_PRICE"],
                       name="Avax Price"), secondary_y=False)
@@ -208,9 +191,8 @@ fig.update_yaxes(
 fig.update_yaxes(title_text=' Hourly Etherum Price', secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
-#####################################################################
 
-st.write(""" ## Avax Price Compare to other Tokens Daily """)
+st.write(""" ## Avax Price Compare to Rivals""")
 
 # AVAX vs MATIC Price [Daily]
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
@@ -223,6 +205,20 @@ fig.update_layout(
 fig.update_yaxes(
     title_text=' Daily Avax Price', secondary_y=False)
 fig.update_yaxes(title_text=' Daily Matic Price', secondary_y=True)
+st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+
+
+# AVAX vs MATIC Price [Hourly]
+fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
+fig.add_trace(go.Line(x=df4['DATE'], y=df4["AVAX_PRICE"],
+                      name="Avax Price"), secondary_y=False)
+fig.add_trace(go.Line(x=df4['DATE'], y=df4["MATIC_PRICE"],
+                      name='Matic Price'), secondary_y=True)
+fig.update_layout(
+    title_text='AVAX vs MATIC Price [Hourly]')
+fig.update_yaxes(
+    title_text=' Hourly Avax Price', secondary_y=False)
+fig.update_yaxes(title_text=' Hourly Matic Price', secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
 # AVAX vs OP Price [Daily]
@@ -238,7 +234,21 @@ fig.update_yaxes(
 fig.update_yaxes(title_text=' Daily Optimism Price', secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
-# AVAX vs Solana Price [Hourly]
+# AVAX vs OP Price [Hourly]
+fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
+fig.add_trace(go.Line(x=df4['DATE'], y=df4["AVAX_PRICE"],
+                      name="Avax Price"), secondary_y=False)
+fig.add_trace(go.Line(x=df4['DATE'], y=df4["OP_PRICE"],
+                      name='Optimism Price'), secondary_y=True)
+fig.update_layout(
+    title_text='AVAX vs Optimism Price [Hourly]')
+fig.update_yaxes(
+    title_text=' Hourly Avax Price', secondary_y=False)
+fig.update_yaxes(title_text=' Hourly Optimism Price', secondary_y=True)
+st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
+
+
+# AVAX vs Solana Price [Daily]
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
 fig.add_trace(go.Line(x=df5['DATE'], y=df5["AVAX_PRICE"],
                       name="Avax Price"), secondary_y=False)
@@ -252,35 +262,26 @@ fig.update_yaxes(title_text=' Daily Solana Price', secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
 
-# AVAX vs Bitcoin Price [Hourly]
+# AVAX vs Solana Price [Hourly]
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
-fig.add_trace(go.Line(x=df5['DATE'], y=df5["AVAX_PRICE"],
+fig.add_trace(go.Line(x=df4['DATE'], y=df4["AVAX_PRICE"],
                       name="Avax Price"), secondary_y=False)
-fig.add_trace(go.Line(x=df5['DATE'], y=df5["BTC_PRICE"],
-                      name='Bitcoin Price'), secondary_y=True)
+fig.add_trace(go.Line(x=df4['DATE'], y=df4["SOL_PRICE"],
+                      name='Solana Price'), secondary_y=True)
 fig.update_layout(
-    title_text='AVAX vs Bitcoin Price [Daily]')
+    title_text='AVAX vs Solana Price [Hourly]')
 fig.update_yaxes(
-    title_text=' Daily Avax Price', secondary_y=False)
-fig.update_yaxes(title_text=' Daily Bitcoin Price', secondary_y=True)
+    title_text=' Hourly Avax Price', secondary_y=False)
+fig.update_yaxes(title_text=' Hourly Solana Price', secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
-# AVAX vs Bitcoin Price [Hourly]
-fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
-fig.add_trace(go.Line(x=df5['DATE'], y=df5["AVAX_PRICE"],
-                      name="Avax Price"), secondary_y=False)
-fig.add_trace(go.Line(x=df5['DATE'], y=df5["ETH_PRICE"],
-                      name='Etherum Price'), secondary_y=True)
-fig.update_layout(
-    title_text='AVAX vs Etherum Price [Daily]')
-fig.update_yaxes(
-    title_text=' Daily Avax Price', secondary_y=False)
-fig.update_yaxes(title_text=' Daily Etherum Price', secondary_y=True)
-st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
 #####################################################################
 
-st.write(""" ##  Price Change Rate Comparison """)
+
+#####################################################################
+
+st.write(""" ##  Price Change Rate [Daily] """)
 
 # Daily Price Change Comprison
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
@@ -303,7 +304,7 @@ fig.update_yaxes(
 fig.update_yaxes(title_text='Price Change', secondary_y=True)
 st.plotly_chart(fig, use_container_width=True, theme=theme_plotly)
 
-st.write(""" ##  Price Change Rate Comparison """)
+st.write(""" ##  Price Change Rate Comparison [Hourly] """)
 
 # Hourly Price Change Comprison
 fig = sp.make_subplots(specs=[[{'secondary_y': True}]])
